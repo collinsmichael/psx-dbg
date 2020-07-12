@@ -69,6 +69,21 @@ typedef int8_t   s8;
 #define DELAY  0x23
 
 
+#define BADA   0x08
+#define SR     0x0C
+#define CAUSE  0x0D
+
+
+
+/* ************************************************************************* */
+/* CPU.C Exceptions                                                          */
+/* ************************************************************************* */
+#define ILLEGAL_OPCODE 0x0001
+#define OVERFLOW       0x0002
+#define BAD_ADDR       0x0003
+#define INTERRUPT      0x0004
+
+
 
 /* ************************************************************************* */
 /* BUS.C                                                                     */

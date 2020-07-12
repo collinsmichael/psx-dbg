@@ -9,47 +9,49 @@
 u8 RAM[2*MB + 8*MB + 2*MB + 512*KB + 4*KB + 8*KB + 1*KB + KB/2];
 u8 VRAM[1024*KB];
 u8 SRAM[512*KB];
-u32 REG[4096];
+u32 REG_CPU[32+4];
+u32 REG_GTE[32];
+u32 REG_COP0[32];
 
 
 
 API int ABI BUS_Reset(void) {
-    REG[R0]    = 0x00000000;
-    REG[R1]    = 0x00000000;
-    REG[R2]    = 0x00000000;
-    REG[R3]    = 0x00000000;
-    REG[R4]    = 0x00000000;
-    REG[R5]    = 0x00000000;
-    REG[R6]    = 0x00000000;
-    REG[R7]    = 0x00000000;
-    REG[R8]    = 0x00000000;
-    REG[R9]    = 0x00000000;
-    REG[R10]   = 0x00000000;
-    REG[R11]   = 0x00000000;
-    REG[R12]   = 0x00000000;
-    REG[R13]   = 0x00000000;
-    REG[R14]   = 0x00000000;
-    REG[R15]   = 0x00000000;
-    REG[R16]   = 0x00000000;
-    REG[R17]   = 0x00000000;
-    REG[R18]   = 0x00000000;
-    REG[R19]   = 0x00000000;
-    REG[R20]   = 0x00000000;
-    REG[R21]   = 0x00000000;
-    REG[R22]   = 0x00000000;
-    REG[R23]   = 0x00000000;
-    REG[R24]   = 0x00000000;
-    REG[R25]   = 0x00000000;
-    REG[R26]   = 0x00000000;
-    REG[R27]   = 0x00000000;
-    REG[R28]   = 0x00000000;
-    REG[R29]   = 0x00000000;
-    REG[R30]   = 0x00000000;
-    REG[R31]   = 0x00000000;
-    REG[LO]    = 0x00000000;
-    REG[HI]    = 0x00000000;
-    REG[PC]    = 0xBFC00000;
-    REG[DELAY] = 0xBFC00004;
+    REG_CPU[R0]    = 0x00000000;
+    REG_CPU[R1]    = 0x00000000;
+    REG_CPU[R2]    = 0x00000000;
+    REG_CPU[R3]    = 0x00000000;
+    REG_CPU[R4]    = 0x00000000;
+    REG_CPU[R5]    = 0x00000000;
+    REG_CPU[R6]    = 0x00000000;
+    REG_CPU[R7]    = 0x00000000;
+    REG_CPU[R8]    = 0x00000000;
+    REG_CPU[R9]    = 0x00000000;
+    REG_CPU[R10]   = 0x00000000;
+    REG_CPU[R11]   = 0x00000000;
+    REG_CPU[R12]   = 0x00000000;
+    REG_CPU[R13]   = 0x00000000;
+    REG_CPU[R14]   = 0x00000000;
+    REG_CPU[R15]   = 0x00000000;
+    REG_CPU[R16]   = 0x00000000;
+    REG_CPU[R17]   = 0x00000000;
+    REG_CPU[R18]   = 0x00000000;
+    REG_CPU[R19]   = 0x00000000;
+    REG_CPU[R20]   = 0x00000000;
+    REG_CPU[R21]   = 0x00000000;
+    REG_CPU[R22]   = 0x00000000;
+    REG_CPU[R23]   = 0x00000000;
+    REG_CPU[R24]   = 0x00000000;
+    REG_CPU[R25]   = 0x00000000;
+    REG_CPU[R26]   = 0x00000000;
+    REG_CPU[R27]   = 0x00000000;
+    REG_CPU[R28]   = 0x00000000;
+    REG_CPU[R29]   = 0x00000000;
+    REG_CPU[R30]   = 0x00000000;
+    REG_CPU[R31]   = 0x00000000;
+    REG_CPU[LO]    = 0x00000000;
+    REG_CPU[HI]    = 0x00000000;
+    REG_CPU[PC]    = 0xBFC00000;
+    REG_CPU[DELAY] = 0xBFC00004;
     return 1;
 }
 
@@ -277,7 +279,7 @@ API u32 ABI BUS_GetReg(u32 reg) {
     if (reg > 32) {
         return 0;
     }
-    return REG[reg];
+    return REG_CPU[reg];
 }
 
 
@@ -285,7 +287,7 @@ API int ABI BUS_SetReg(u32 reg, u32 val) {
     if (reg > 32) {
         return 0;
     }
-    REG[reg] = val;
+    REG_CPU[reg] = val;
     return 1;
 }
 
